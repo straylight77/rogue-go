@@ -89,7 +89,8 @@ func (d *Display) Init() {
 	d.styles["darkgreen"] = tcell.StyleDefault.Foreground(tcell.ColorDarkGreen)
 
 	scr.SetStyle(d.styles["default"])
-	scr.SetCursorStyle(tcell.CursorStyleSteadyBlock)
+	//scr.SetCursorStyle(tcell.CursorStyleSteadyBlock)
+	scr.HideCursor()
 	scr.Clear()
 	d.Screen = scr
 }
@@ -207,7 +208,7 @@ func (d *Display) DrawItem(pos Coord, item Item) {
 func (d *Display) DrawPlayer(p *Player) {
 	x, y := p.Pos().XY()
 	d.Screen.SetContent(x, y+1, '@', nil, d.Style("default"))
-	d.Screen.ShowCursor(x, y+1)
+	//d.Screen.ShowCursor(x, y+1)
 }
 
 // -----------------------------------------------------------------------------
@@ -248,7 +249,7 @@ func (d *Display) DrawMessageHistory(log *MessageLog) {
 		d.Printf(0, i, "%v", m)
 	}
 	d.Printf(0, 24, "Press space to continue...")
-	d.Screen.HideCursor()
+	//d.Screen.HideCursor()
 	d.Show()
 }
 
@@ -287,7 +288,7 @@ func (d *Display) InventoryScreen(p *Player) {
 	}
 
 	d.Printf(0, 23, "Press space to continue...")
-	d.Screen.HideCursor()
+	//d.Screen.HideCursor()
 	d.Show()
 }
 
@@ -299,7 +300,7 @@ func (d *Display) PromptInventory(prompt string, p *Player) int {
 
 	d.Print(0, 0, strings.Repeat(" ", 80))
 	d.Print(0, 0, str)
-	d.Screen.ShowCursor(len(str), 0)
+	//d.Screen.ShowCursor(len(str), 0)
 	d.Show()
 
 	ch := d.PromptRune()
@@ -471,7 +472,7 @@ func (d *Display) TombstoneScreen(gs *GameState) {
 	d.Print(40-(len(killedBy)/2), 24-10, killedBy)
 	scoreStr := fmt.Sprintf("%d", gs.player.Score())
 	d.Print(40-(len(scoreStr)/2), 24-8, scoreStr)
-	d.Screen.HideCursor()
+	//d.Screen.HideCursor()
 	d.Show()
 	d.WaitForKeypress()
 }

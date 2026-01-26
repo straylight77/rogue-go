@@ -69,14 +69,14 @@ func (gs *GameState) MoveActor(a Actor, delta Coord) bool {
 	}
 
 	// Slightly different logic between monsters and the player
-	switch a.(type) {
+	switch a := a.(type) {
 
 	case *Monster:
 		// If player is there attack them
 		if dest == gs.player.Pos() {
 			a.Attack(gs.player, gs.messages)
 			if gs.player.HP <= 0 {
-				gs.player.killedBy = "a " + a.(*Monster).String()
+				gs.player.killedBy = "a " + a.String()
 			}
 			return true
 		}

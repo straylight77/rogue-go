@@ -191,9 +191,9 @@ func (p *Player) DamageDice() Dice {
 // -----------------------------------------------------------------------
 
 func (p *Player) Pickup(item Item) bool {
-	switch item.(type) {
+	switch item := item.(type) {
 	case *Gold:
-		p.Gold += item.(*Gold).qty
+		p.Gold += item.qty
 		return true
 	default:
 		p.inventory = append(p.inventory, item)

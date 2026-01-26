@@ -139,9 +139,9 @@ func main() {
 				idx := display.PromptInventory("Consume what?", state.player)
 				if idx != -1 {
 					item := state.player.inventory[idx]
-					switch item.(type) {
+					switch item := item.(type) {
 					case Consumable:
-						doUpdate = item.(Consumable).Consume(&state)
+						doUpdate = item.Consume(&state)
 						state.player.RemoveItem(idx)
 					default:
 						state.messages.Add("You cannot consume that item.")
@@ -156,9 +156,9 @@ func main() {
 				idx := display.PromptInventory("Equip or unequip what?", state.player)
 				if idx != -1 {
 					item := state.player.inventory[idx]
-					switch item.(type) {
+					switch item := item.(type) {
 					case Equipable:
-						doUpdate = item.(Equipable).Equip(state.player, state.messages)
+						doUpdate = item.Equip(state.player, state.messages)
 					default:
 						state.messages.Add("You cannot equip that item.")
 					}
@@ -215,16 +215,16 @@ func main() {
 
 		if done {
 			for _, item := range state.player.inventory {
-				switch item.(type) {
+				switch item := item.(type) {
 				case Consumable:
-					item.(Consumable).Identify()
+					item.Identify()
 				}
 			}
 			display.Clear()
 			draw(&display, &state)
 			msg := "Your inventory (press SPACE to continue):"
 			display.Printf(0, 0, msg)
-			display.Screen.ShowCursor(len(msg), 0)
+			//display.Screen.ShowCursor(len(msg), 0)
 			display.ListInventory(state.player, len(msg), true)
 			display.WaitForKeypress()
 

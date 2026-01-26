@@ -89,7 +89,7 @@ func (g *Gold) InvString() string {
 
 func (g *Gold) GndString() string {
 	if g.qty == 1 {
-		return fmt.Sprintf("1 piece of gold")
+		return "1 piece of gold"
 	} else {
 		return fmt.Sprintf("%d pieces of gold", g.qty)
 	}

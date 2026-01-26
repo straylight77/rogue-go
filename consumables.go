@@ -37,7 +37,6 @@ func (f *Food) String() string {
 }
 
 func (f *Food) Identify() {
-	return
 }
 
 func (f *Food) Consume(gs *GameState) bool {

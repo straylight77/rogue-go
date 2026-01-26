@@ -91,11 +91,11 @@ func findPathBFS(dm *DungeonMap, start, end Coord) Path {
 }
 
 // -----------------------------------------------------------------------
-func drawPathDebug(disp *Display, path Path, ch rune) {
-	for _, pos := range path.steps {
-		disp.Screen.SetContent(pos.X, pos.Y+1, ch, nil, disp.Style("debug2"))
-	}
-}
+// func drawPathDebug(disp *Display, path Path, ch rune) {
+// 	for _, pos := range path.steps {
+// 		disp.Screen.SetContent(pos.X, pos.Y+1, ch, nil, disp.Style("debug2"))
+// 	}
+// }
 
 // -----------------------------------------------------------------------
 func drawPathDebugIdx(disp *Display, path Path) {
