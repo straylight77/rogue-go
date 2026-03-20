@@ -30,7 +30,7 @@ var RuneCmdLookup = map[rune]GameCommand{
 	'M': CmdMessages,
 	'>': CmdDown,
 	'<': CmdUp,
-	'1': CmdSouthWest,
+	'1': CmdSouthWest,	// keypad movement
 	'2': CmdSouth,
 	'3': CmdSouthEast,
 	'4': CmdWest,
@@ -39,6 +39,10 @@ var RuneCmdLookup = map[rune]GameCommand{
 	'7': CmdNorthWest,
 	'8': CmdNorth,
 	'9': CmdNorthEast,
+	'h': CmdWest,		// vim movement
+	'l': CmdEast,
+	'j': CmdSouth,
+	'k': CmdNorth,
 	'i': CmdInventory,
 	'c': CmdConsume,
 	'e': CmdEquip,
