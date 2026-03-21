@@ -64,7 +64,7 @@ func populateMonsters(gs *GameState) {
 // ----------------------------------------------------------------------------
 func populateItems(gs *GameState) {
 
-	for i := 0; i < 9; i++ {
+	for range 9 {
 
 		roll := rand.Intn(100) + 1
 		if roll > 35 {
@@ -190,7 +190,7 @@ func newRandomGraph() *RoomGraph {
 
 	// Add a few more connections to keep it interesting
 	n := rand.Intn(2) + 1 // 1-2
-	for i := 0; i < n; i++ {
+	for range n {
 		found := false
 		count = 0
 		for !found && count < 10 {
@@ -273,7 +273,7 @@ func (g *RoomGraph) Direction(c1, c2 int) Direction {
 // ----------------------------------------------------------------------------
 // Marks the given number of cells as dropped.  Assume they are already connected.
 func (g *RoomGraph) DropRandomRooms(count int) {
-	for i := 0; i < count; i++ {
+	for range count {
 		cell := g.RandCell(1)
 		//debug.Add("Dropping room %d", cell)
 		g.rooms[cell].mark = -1
@@ -291,8 +291,8 @@ func (g *RoomGraph) MakeCellBounds() (areas []Room) {
 
 	// split the map into 3x3 areas determine the bounds of each one
 	idx := 0
-	for i := 0; i < 3; i++ {
-		for j := 0; j < 3; j++ {
+	for i := range 3 {
+		for j := range 3 {
 			r := Room{X: (roomW + 1) * j, Y: (roomH + 1) * i, W: roomW, H: roomH}
 			g.bounds[idx] = r
 			idx++

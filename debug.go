@@ -87,7 +87,8 @@ func drawGenerateDebug(disp *Display) {
 		disp.Debug(c.X, c.Y+1, "X") // Y+1 to convert to map coords
 	}
 
-	for i := 0; i < 9; i++ {
+	//for i := 0; i < 9; i++ {
+	for i := range 9 {
 		lst := graph.Neighbours(i)
 		disp.Debug(20, 28+i, lst)
 	}
@@ -97,8 +98,8 @@ func drawGenerateDebug(disp *Display) {
 	}
 
 	cell := 0
-	for row := 0; row < 3; row++ {
-		for col := 0; col < 3; col++ {
+	for row := range 3 {
+		for col := range 3 {
 			if graph.rooms[cell].mark != -1 {
 				disp.Debug(50+(4*col), 28+(2*row), cell)
 			}
