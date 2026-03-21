@@ -13,21 +13,13 @@ type Item interface {
 }
 
 type Consumable interface {
-	Rune() rune
-	InvString() string
-	GndString() string
-	Worth() int
-
+	Item
 	Consume(*GameState) bool
 	Identify()
 }
 
 type Equipable interface {
-	Rune() rune
-	InvString() string
-	GndString() string
-	Worth() int
-
+	Item
 	Equip(*Player, *MessageLog) bool
 	Unequip(*Player, *MessageLog) bool
 	//Identify()
@@ -109,20 +101,20 @@ func randGoldAmt(depth int) int {
 
 // === EFFECTS ===========================================================
 const (
-	E_Nothing = iota
-	E_Healing
-	E_ExtraHealing
-	E_Strength
-	E_Poison
-	E_Confusion
-	E_Blindness
-	E_Restore
-	E_DetMagic
-	E_DetMonsters
-	E_LevelUp
-	E_Paralyze
-	E_Haste
-	E_Truesight
+	ENothing = iota
+	EHealing
+	EExtraHealing
+	EStrength
+	EPoison
+	EConfusion
+	EBlindness
+	ERestore
+	EDetMagic
+	EDetMonsters
+	ELevelUp
+	EParalyze
+	EHaste
+	ETruesight
 )
 
 func doEffect(effect int, gs *GameState) {
@@ -131,39 +123,39 @@ func doEffect(effect int, gs *GameState) {
 	}
 
 	switch effect {
-	case E_Nothing:
+	case ENothing:
 		//do nothing
-	case E_Healing:
+	case EHealing:
 		gs.player.AdjustHP(gs.player.Level * 3)
 		gs.player.SetTimer("blind", 0)
 		gs.player.SetTimer("confusion", 0)
-	case E_ExtraHealing:
+	case EExtraHealing:
 		gs.player.AdjustHP(gs.player.Level * 5)
 		gs.player.SetTimer("blind", 0)
 		gs.player.SetTimer("confusion", 0)
-	case E_Strength:
+	case EStrength:
 		gs.player.Str += 1
 		gs.player.maxStr += 1
-	case E_Poison:
+	case EPoison:
 		gs.player.Str -= rand.Intn(3) + 1
-	case E_Restore:
+	case ERestore:
 		gs.player.Str = gs.player.maxStr
-	case E_Blindness:
+	case EBlindness:
 		gs.player.SetTimer("blind", 850)
-	case E_Confusion:
+	case EConfusion:
 		gs.player.SetTimer("confused", 20+rand.Intn(8))
-	case E_DetMonsters:
+	case EDetMonsters:
 		gs.player.SetTimer("detMonsters", 850)
-	case E_DetMagic:
+	case EDetMagic:
 		gs.player.SetTimer("detMagic", 850)
-	case E_LevelUp:
+	case ELevelUp:
 		gs.player.XP = XPTable[gs.player.Level]
-	case E_Paralyze:
+	case EParalyze:
 		gs.player.SetTimer("paralyzed", 3)
-	case E_Haste:
+	case EHaste:
 		// if already hasted, faint for 0-7 turns
 		gs.player.SetTimer("haste", rand.Intn(5)+10)
-	case E_Truesight:
+	case ETruesight:
 		gs.player.SetTimer("truesight", 850)
 		gs.player.SetTimer("blind", 0)
 	default:

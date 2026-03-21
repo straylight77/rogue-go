@@ -101,7 +101,7 @@ func (w *Weapon) Worth() int {
 	}
 }
 
-func (w Weapon) String() string {
+func (w *Weapon) String() string {
 	return w.name
 }
 

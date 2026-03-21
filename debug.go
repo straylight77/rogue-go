@@ -19,10 +19,9 @@ func (log *DebugMessageLog) Clear() {
 }
 
 func (log *DebugMessageLog) Draw(disp *Display, startX, startY int) {
-	for i, msg := range debug.messages {
+	for i, msg := range log.messages {
 		disp.Debug(startX, startY+i, msg)
 	}
-
 }
 
 // -----------------------------------------------------------------------------
