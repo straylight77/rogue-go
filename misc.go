@@ -138,11 +138,3 @@ func abs(val int) int {
 	}
 	return val
 }
-
-func max(val1, val2 int) int {
-	if val1 > val2 {
-		return val1
-	} else {
-		return val2
-	}
-}
